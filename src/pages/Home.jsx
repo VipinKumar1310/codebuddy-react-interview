@@ -115,7 +115,7 @@ const Home = () => {
     }
   }
 
-  console.log("currentStep", currentStep);
+  console.log("isLastStep", isLastStep, steps.length - 1, currentStep);
 
   return (
     <div className="relative mx-5 min-h-[500px] w-full max-w-xl rounded-lg bg-gray-50 p-7 text-gray-900 shadow-lg">
@@ -173,7 +173,9 @@ const Home = () => {
             <button
               disabled={isLastStep}
               type="submit"
-              className="rounded-3xl border bg-green-400 px-4 py-2 hover:bg-green-500"
+              className={`rounded-3xl border px-4 py-2 ${
+                isLastStep ? "cursor-not-allowed bg-gray-400" : "bg-green-400 hover:bg-green-500"
+              }`}
               // onClick={nextStep}
             >
               Save & Next
