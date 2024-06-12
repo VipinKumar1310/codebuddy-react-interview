@@ -42,6 +42,7 @@ const Home = () => {
     ]);
 
   const validateStep = () => {
+    console.log(data);
     const newErrors = {};
     if (currentStep === 0) {
       if (!data.emailId || !/^\S+@\S+\.\S+$/.test(data.emailId)) {
@@ -95,6 +96,7 @@ const Home = () => {
       });
       const result = await response.json();
       if (result.message === "Success") {
+        alert("Form submitted successfully.");
         navigate("/posts");
       } else {
         console.error("Submission failed:", result);
@@ -114,8 +116,6 @@ const Home = () => {
       }
     }
   }
-
-  console.log("isLastStep", isLastStep, steps.length - 1, currentStep);
 
   return (
     <div className="relative mx-5 min-h-[500px] w-full max-w-xl rounded-lg bg-gray-50 p-7 text-gray-900 shadow-lg">

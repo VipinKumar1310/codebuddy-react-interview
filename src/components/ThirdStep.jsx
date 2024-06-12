@@ -1,12 +1,6 @@
 import PropTypes from "prop-types";
 
-const ThirdStep = ({
-  countryCode,
-  phoneNumber,
-  acceptTermsAndCondition = true,
-  updateFields,
-  errors,
-}) => {
+const ThirdStep = ({ countryCode, phoneNumber, acceptTermsAndCondition, updateFields, errors }) => {
   console.log(acceptTermsAndCondition);
   return (
     <div className="flex flex-col gap-2">

@@ -56,19 +56,22 @@ const INITIAL_POSTS = [
 const Posts = () => {
   const [posts, setPosts] = useState(INITIAL_POSTS);
 
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     try {
-  //       const response = await fetch("https://codebuddy.review/posts");
-  //       const result = await response.json();
-  //       setPosts(result);
-  //     } catch (error) {
-  //       console.error("Error fetching posts:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("https://codebuddy.review/posts");
+        const result = await response.json();
+        setPosts(result.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
 
-  //   fetchPosts();
-  // }, []);
+    fetchPosts();
+  }, []);
+
+  console.log("posts", posts);
+
   return (
     <div className="mx-5 rounded-lg bg-gray-50 p-7 text-gray-900 shadow-lg">
       <h1 className="mb-7 text-4xl font-bold">Posts</h1>
@@ -77,24 +80,32 @@ const Posts = () => {
         Back to Home
       </Link>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <div key={post.id} className="rounded-lg bg-white p-4 shadow-md">
-            <div className="mb-4 flex items-center">
-              <img
-                src={post.avatar}
-                alt={`${post.firstName} ${post.lastName}`}
-                className="mr-4 h-10 w-10 rounded-full"
-              />
-              <div>
-                <h2 className="text-lg font-semibold">
-                  {post.firstName} {post.lastName}
-                </h2>
+        {posts ? (
+          posts.map((post) => (
+            <div key={post.id} className="rounded-lg bg-white p-4 shadow-md">
+              <div className="mb-4 flex items-center">
+                <img
+                  src={post.avatar}
+                  alt={`${post.firstName} ${post.lastName}`}
+                  className="mr-4 h-10 w-10 rounded-full"
+                />
+                <div>
+                  <h2 className="text-lg font-semibold">
+                    {post.firstName} {post.lastName}
+                  </h2>
+                </div>
               </div>
+              <img
+                src={post.image}
+                alt="Post"
+                className="mb-4 aspect-video h-auto w-auto rounded-md object-fill"
+              />
+              <p>{post.writeup}</p>
             </div>
-            <img src={post.image} alt="Post" className="mb-4 h-36 w-full rounded-md object-cover" />
-            <p>{post.writeup}</p>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div>No Posts </div>
+        )}
       </div>
     </div>
   );
